@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dự báo giá xe cũ</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>DỰ ĐOÁN GIÁ XE CŨ</h1>
+    <table>
+        <thead>
+            <th>id</th>
+            <th>Giá</th>
+            <th>Ngày dự đoán</th>
+            <th>Thời gian dự đoán</th>
+        </thead>
+        <tbody id="predict-table-body">
+            {% for predict in predicts %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{predict.prediction}}</td>
+                <td>{{ predict.date }}</td>
+                <td>{{ predict.time }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        function fetchData() {
+            var endpoint = window.location.origin + '/getData';
+            $.ajax({
+                url: endpoint, // Endpoint trả về dữ liệu mới
+                type: 'GET',
+                success: function(data) {
+                    let id = 1;
+                    var tableContent = '';
+                    data.forEach(function(predict) {
+                        tableContent += '<tr>' +
+                                            '<td>' + id++ + '</td>' +
+                                            '<td>' + predict.prediction + '</td>' +
+                                            '<td>' + predict.date + '</td>' +
+                                            '<td>' + predict.time + '</td>' +
+                                        '</tr>';
+                    });
+
+                    // Cập nhật bảng
+                    $('#predict-table-body').html(tableContent);
+                },
+                complete: function() {
+                    // Gọi lại sau một khoảng thời gian cố định
+                    setTimeout(fetchData, 1000); // 5000 ms = 5 giây
+                }
+            });
+        }
+    
+        // Khởi đầu polling khi tải trang
+        $(document).ready(function() {
+            fetchData();
+        });
+    </script>
+</body>
+</html>
