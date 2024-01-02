@@ -33,3 +33,6 @@ def getData():
 
     # Trả về dữ liệu dưới dạng JSON
     return jsonify(result)
+
+def notfound():
+    return render_template('notfound.html')

@@ -6,7 +6,7 @@ import os
 from database.mongodb import db
 from datetime import datetime
 import joblib
-from app.utils.old_motobike_predict import preprocess_data
+from app.services.old_motobike_predict import preprocess_data
 
 # Tải model và encoder
 encoder_path = 'app/utils/encoder.joblib'
