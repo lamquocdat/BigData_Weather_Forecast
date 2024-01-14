@@ -5,7 +5,7 @@ from pymongo import DESCENDING
 from database.mongodb import db
 
 def home():
-    predicts = list(db.predict_old_motobike.find().sort('predictedAt', DESCENDING))
+    predicts = list(db.predict.find().sort('predictedAt', DESCENDING))
 
     for predict in predicts:
         predicted_at = predict['predictedAt']
@@ -15,7 +15,7 @@ def home():
     return render_template('home.html', **locals())
 
 def getData():
-    predicts = list(db.predict_old_motobike.find().sort('predictedAt', DESCENDING))
+    predicts = list(db.predict.find().sort('predictedAt', DESCENDING))
     result = []
     for predict in predicts:
         predict_dict = {}
