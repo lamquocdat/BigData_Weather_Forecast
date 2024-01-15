@@ -17,6 +17,7 @@
             <th scope="col" class="table-info">Id</th>
             <th scope="col" class="table-secondary">Giá trị dự đoán gốc</th>
             <th scope="col" class="table-success">Thời tiết</th>
+            <th scope="col" class="table-danger">Lượng mưa</th>
             <th scope="col" class="table-primary">Ngày dự đoán</th>
             <th scope="col" class="table-warning">Thời gian dự đoán</th>
           </tr>
@@ -27,6 +28,7 @@
                 <th scope="row" class="table-info">{{ loop.index }}</th>
                 <td class="table-secondary">{{ predict.prediction_origin }}</td>
                 <td class="table-success">{{ predict.prediction }}</td>
+                <td class="table-danger">{{ predict.precipMM }}</td>
                 <td class="table-primary">{{ predict.date }}</td>
                 <td class="table-warning">{{ predict.time }}</td>
             </tr>
@@ -48,6 +50,7 @@
                                             '<th scope="row" class="table-info">' + id++ + '</th>' +
                                             '<td class="table-secondary">' + predict.prediction_origin + '</td>' +
                                             '<td class="table-success">' + predict.prediction + '</td>' +
+                                            '<td class="table-danger">' + predict.precipMM + '</td>' +
                                             '<td class="table-primary">' + predict.date + '</td>' +
                                             '<td class="table-warning">' + predict.time + '</td>' +
                                         '</tr>';
