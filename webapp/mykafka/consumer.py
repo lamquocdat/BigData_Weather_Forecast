@@ -17,7 +17,7 @@ weather_model_path = "app/models/weather/random_forest_model"
 weather_model = PipelineModel.load(weather_model_path)
 
 # Tải model dự đoán lượng mưa
-rain_model_path = "app/models/amount_of_rain/random_forest_model"
+rain_model_path = "app/models/amount_of_rain/logistic_regression_model"
 rain_model = PipelineModel.load(rain_model_path)
 
 # Hàm ánh xạ kết quả dự đoán thời tiết
@@ -49,7 +49,6 @@ def map_label_to_precipMM(prediction):
         160.0: 25.9, 161.0: 28.5, 162.0: 29.8, 163.0: 30.1, 164.0: 31.1, 165.0: 31.5, 166.0: 42.8
     }
 
-
     return  mapping_dict.get(prediction, None)
     
 def create_consumer():
@@ -67,8 +66,6 @@ def create_consumer():
     return consumer
 
 def consume_messages(consumer):
-    collection_old_car = db.data
-
     for message in consumer:
         # Chuyển các cột kiểu string mà có dạng số thành float
         numeric_columns = ['moon_illumination', 'time','tempC','tempF','windspeedMiles','windspeedKmph','winddirDegree', 'weatherCode','precipInches','humidity','visibility','visibilityMiles','pressure','pressureInches','cloudcover','HeatIndexC','HeatIndexF','DewPointC','DewPointF','WindChillC','WindChillF','WindGustMiles','WindGustKmph','FeelsLikeC','FeelsLikeF','uvIndex']
@@ -76,16 +73,15 @@ def consume_messages(consumer):
             float_value = float(message.value[column])
             message.value[column] = float_value
 
-        data = copy.deepcopy(message.value)
         predict_origin = message.value['predict']
         precipMM_origin = message.value['precipMM']
 
         current_time = datetime.now() 
 
+        data = copy.deepcopy(message.value)
         data['createdAt'] = current_time
         data['updatedAt'] = current_time
-
-        collection_old_car.insert_one(data)
+        db.data.insert_one(data)
 
         # print(f"\nReceived message: \n{message.value}")
 
@@ -93,9 +89,8 @@ def consume_messages(consumer):
         weather_prediction = weatherPrediction(message.value, weather_model)
 
         # Kiểm tra nếu kết quả là mưa thì dự đoán lượng mưa, còn không mưa thì lượng mưa là 0
-        if(weather_prediction[0]['prediction'] == 1):
-            weather_prediction[0]['predict'] = convert_prediction(weather_prediction[0].pop('prediction', None))
-
+        weather_prediction[0]['predict'] = convert_prediction(weather_prediction[0].pop('prediction', None))
+        if(weather_prediction[0]['predict'] == "rain"):
             rain_prediction = amountOfRain(weather_prediction[0], rain_model)
             
             rain_prediction[0]['rain_prediction'] = map_label_to_precipMM(rain_prediction[0].pop('prediction'))
@@ -105,8 +100,6 @@ def consume_messages(consumer):
 
             db.predict.insert_one(rain_prediction[0])
         else:
-            weather_prediction[0]['predict'] = convert_prediction(weather_prediction[0].pop('prediction', None))
-
             weather_prediction[0]['rain_prediction'] = 0
             weather_prediction[0]['predict_origin'] = predict_origin
             weather_prediction[0]['precipMM_origin'] = precipMM_origin
