@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1729308188919,"sparkVersion":"3.5.3","uid":"VectorAssembler_bb740e0d32c6","paramMap":{"outputCol":"features","inputCols":["predictId","weatherDescId","weatherIconUrlId","weatherCode","precipInches"]},"defaultParamMap":{"outputCol":"VectorAssembler_bb740e0d32c6__output","handleInvalid":"error"}}

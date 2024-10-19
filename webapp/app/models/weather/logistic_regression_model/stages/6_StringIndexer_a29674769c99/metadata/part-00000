@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1729307006633,"sparkVersion":"3.5.3","uid":"StringIndexer_a29674769c99","paramMap":{"outputCol":"WIndex","inputCol":"winddir16Point"},"defaultParamMap":{"outputCol":"StringIndexer_a29674769c99__output","handleInvalid":"error","stringOrderType":"frequencyDesc"}}

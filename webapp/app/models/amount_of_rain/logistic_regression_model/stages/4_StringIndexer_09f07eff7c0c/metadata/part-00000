@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1705761362289,"sparkVersion":"3.5.0","uid":"StringIndexer_09f07eff7c0c","paramMap":{"inputCol":"moonset","outputCol":"moonsetIndex"},"defaultParamMap":{"stringOrderType":"frequencyDesc","handleInvalid":"error","outputCol":"StringIndexer_09f07eff7c0c__output"}}

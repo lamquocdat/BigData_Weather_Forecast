@@ -49,7 +49,7 @@ def map_label_to_precipMM(prediction):
         160.0: 25.9, 161.0: 28.5, 162.0: 29.8, 163.0: 30.1, 164.0: 31.1, 165.0: 31.5, 166.0: 42.8
     }
 
-    return  mapping_dict.get(prediction, None)
+    return mapping_dict.get(prediction, None)
     
 def create_consumer():
     topic_name = os.environ.get("KAFKA_TOPIC_NAME", "my_topic")

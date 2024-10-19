@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1729308190524,"sparkVersion":"3.5.3","uid":"StringIndexer_aca449669ce1","paramMap":{"inputCol":"precipMM","outputCol":"label"},"defaultParamMap":{"handleInvalid":"error","outputCol":"StringIndexer_aca449669ce1__output","stringOrderType":"frequencyDesc"}}

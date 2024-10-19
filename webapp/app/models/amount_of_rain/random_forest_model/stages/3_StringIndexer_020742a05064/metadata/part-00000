@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1705761358901,"sparkVersion":"3.5.0","uid":"StringIndexer_020742a05064","paramMap":{"outputCol":"moonriseIndex","inputCol":"moonrise"},"defaultParamMap":{"handleInvalid":"error","outputCol":"StringIndexer_020742a05064__output","stringOrderType":"frequencyDesc"}}
