@@ -9,7 +9,7 @@ This project uses Spark, Hadoop, and Kafka to input weather data into two traine
 - Java 11.0.25
 - kafka_2.12-3.8.0
 - Hadoop 3.3.5
-- Jupyter Notebook (can be used with Visual Studio Code)
+- Jupyter Notebook
 - MongoDB 7.0.12
 ```
 
@@ -19,17 +19,21 @@ During the setup and execution of the project, you might encounter compatibility
 
 Refer to the files in the `dependencies` directory for more details.
 
+NOTE: 
+- To use hadoop in Windows, you only need winutils.exe and hadoop.dll, no need to install the whole hadoop. I have put it in dependency/hadoop, you can refer to it.
+- With Jupyter Notebook, you can install the Jupyter extension in Visual Studio Code and use it directly on VS code.
+
 # Usage
 The project has been developed and tested on Windows. I have not tested it on other operating systems.
 
 ## 1. Export model
-Run `training-weather-forcast.ipynb` and `rainfall-prediction.ipynb` in `machine_learning/notebooks` to export models.
+Run `training-weather-forcast.ipynb` and `rainfall-prediction.ipynb` in `machine_learning/notebooks` to export models (I ran them in Kaggle).
 
-Paste the models you want to use into `webapp/app/models/amount_of_rain` and `webapp/app/models/weather`.
+Paste the models you want to use into `webapp/app/models/weather` and `webapp/app/models/amount_of_rain` to override the models in here.
 
-Change the paths (`weather_model_path` and `rain_model_path`) to the models to use in `web/app/mykafka`.
+Change the paths (`weather_model_path` and `rain_model_path`) to the models you want to use in `web/app/mykafka`.
 
-NOTE: If you do not export new models but use existing models in the code, you may receive errors related to these models (checksum, etc).
+NOTE: If you do not export new models but use existing models in `webapp/app/models`, you may receive errors related to these models (checksum, etc).
 
 ## 2. Create a .env file and Prepare Mongodb
 Copy the contents from `.env.example` and paste them into a `.env` file in the `webapp` directory (create the file if it doesn't exist).
@@ -37,6 +41,7 @@ Copy the contents from `.env.example` and paste them into a `.env` file in the `
 Edit the values in the `.env` file to suit your environment.
 
 In MongoDB, create database with name is `DB_NAME` in `.env` and two collection `data` and `predict`.
+
 ## 3. Run Kafka
 In the kafka directory, run the following commands in two separate terminals to start the Zookeeper and Kafka server:
 
@@ -52,7 +57,7 @@ Install the necessary libraries by running the following command:
 pip install -r .\webapp\requirements.txt
 ```
 
-Then, in the `machine_learning/notebooks` directory, run the `Weather_producer.ipynb` file using Jupyter Notebook (it can also be run in Visual Studio Code).
+Then, in the `machine_learning/notebooks` directory, run the `Weather_producer.ipynb` file using Jupyter Notebook (or Visual Studio Code if you have installed the Jupyter extension).
 
 Adjust the file paths as needed.
 
