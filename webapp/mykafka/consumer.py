@@ -52,7 +52,7 @@ def map_label_to_precipMM(prediction):
     return mapping_dict.get(prediction, None)
     
 def create_consumer():
-    topic_name = os.environ.get("KAFKA_TOPIC_NAME", "my_topic")
+    topic_name = os.environ.get("KAFKA_TOPIC_NAME", "bigdata")
     server_name = os.environ.get("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
     group = os.environ.get("KAFKA_GROUP_ID", "my_group")
 
