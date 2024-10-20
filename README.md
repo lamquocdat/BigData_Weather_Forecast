@@ -19,8 +19,6 @@ You need to create system variables for `JAVA_HOME` and `HADOOP_HOME`.
 
 During the setup and execution of the project, you might encounter compatibility issues between PySpark, Hadoop, and Java. Versions may need to be adjusted accordingly for them to work together.
 
-Refer to the files in the `dependencies` directory for more details.
-
 NOTE:
 
 - To use hadoop in Windows, you only need winutils.exe and hadoop.dll, no need to install the whole hadoop. I have put it in dependency/hadoop, you can refer to it.
