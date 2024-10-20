@@ -7,19 +7,15 @@ This project uses Spark, Hadoop, and Kafka to input weather data into two traine
 ## Setup
 
 ```text
-- Python 3.10.11
-- Java 11.0.25
+- Python 3.10
+- Java 11
 - kafka_2.12-3.8.0
 - Hadoop 3.3.5
 - Jupyter Notebook
-- MongoDB 7.0.12
+- MongoDB
 ```
 
-You need to create system variables for `JAVA_HOME` and `HADOOP_HOME`.
-
 During the setup and execution of the project, you might encounter compatibility issues between PySpark, Hadoop, and Java. Versions may need to be adjusted accordingly for them to work together.
-
-Refer to the files in the `dependencies` directory for more details.
 
 NOTE:
 
@@ -34,7 +30,7 @@ The project has been developed and tested on Windows. I have not tested it on ot
 
 Run `training-weather-forcast.ipynb` and `rainfall-prediction.ipynb` in `machine_learning/notebooks` to export models (I ran them in Kaggle).
 
-Paste the models you want to use into `webapp/app/models/weather` and `webapp/app/models/amount_of_rain` to override the models in here.
+Paste the exported models from `training-weather-forcast.ipynb` to `webapp/app/models/weather` and from `rainfall-prediction.ipynb` to `webapp/app/models/amount_of_rain` for overriding the model here.
 
 Change the paths (`weather_model_path` and `rain_model_path`) to the models you want to use in `web/app/mykafka`.
 
@@ -116,9 +112,11 @@ The weather data is sourced from <https://www.worldweatheronline.com/>
 
 ### Machine Learning Models and Components
 
-Run the `weather-forcast.ipynb` and `rainfall-prediction.ipynb` notebook located in `machine_learning/notebooks` to train and export the models (this notebook was executed on Kaggle).
+Run the `weather-forcast.ipynb` and `rainfall-prediction.ipynb` notebook located in `machine_learning/notebooks` to train and export the models.
 
-Once the model is exported, move it to the `webapp/app/models` directory. To use the model, modify two model_path variable (`weather_model_path` and `rain_model_path`) in `webapp/mykafka/consumer.py` to point to the correct model path.
+`weather-forcast.ipynb` will produce two models for weather forecasting: `logistic_regression_model` and `random_forest_model`.
+
+`rainfall-prediction.ipynb` will also produce two models for predicting rainfall: `logistic_regression_model` and `random_forest_model`.
 
 ### Retraining and Updating the Model
 
