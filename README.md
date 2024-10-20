@@ -7,15 +7,13 @@ This project uses Spark, Hadoop, and Kafka to input weather data into two traine
 ## Setup
 
 ```text
-- Python 3.10.11
-- Java 11.0.25
+- Python 3.10
+- Java 11
 - kafka_2.12-3.8.0
 - Hadoop 3.3.5
 - Jupyter Notebook
-- MongoDB 7.0.12
+- MongoDB
 ```
-
-You need to create system variables for `JAVA_HOME` and `HADOOP_HOME`.
 
 During the setup and execution of the project, you might encounter compatibility issues between PySpark, Hadoop, and Java. Versions may need to be adjusted accordingly for them to work together.
 
