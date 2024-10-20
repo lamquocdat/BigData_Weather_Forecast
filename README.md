@@ -30,7 +30,7 @@ The project has been developed and tested on Windows. I have not tested it on ot
 
 Run `training-weather-forcast.ipynb` and `rainfall-prediction.ipynb` in `machine_learning/notebooks` to export models (I ran them in Kaggle).
 
-Paste the models you want to use into `webapp/app/models/weather` and `webapp/app/models/amount_of_rain` to override the models in here.
+Paste the exported models from `training-weather-forcast.ipynb` to `webapp/app/models/weather` and from `rainfall-prediction.ipynb` to `webapp/app/models/amount_of_rain` for overriding the model here.
 
 Change the paths (`weather_model_path` and `rain_model_path`) to the models you want to use in `web/app/mykafka`.
 
@@ -112,9 +112,11 @@ The weather data is sourced from <https://www.worldweatheronline.com/>
 
 ### Machine Learning Models and Components
 
-Run the `weather-forcast.ipynb` and `rainfall-prediction.ipynb` notebook located in `machine_learning/notebooks` to train and export the models (this notebook was executed on Kaggle).
+Run the `weather-forcast.ipynb` and `rainfall-prediction.ipynb` notebook located in `machine_learning/notebooks` to train and export the models.
 
-Once the model is exported, move it to the `webapp/app/models` directory. To use the model, modify two model_path variable (`weather_model_path` and `rain_model_path`) in `webapp/mykafka/consumer.py` to point to the correct model path.
+`weather-forcast.ipynb` will produce two models for weather forecasting: `logistic_regression_model` and `random_forest_model`.
+
+`rainfall-prediction.ipynb` will also produce two models for predicting rainfall: `logistic_regression_model` and `random_forest_model`.
 
 ### Retraining and Updating the Model
 
